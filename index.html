@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>k.priyadharshini| Portfolio</title>
+  <style>
+    body {font-family: "Segoe UI", sans-serif; margin:0; background:#1e1e2f; color:#fff;}
+    header {background:#111; padding:15px 0; position:sticky; top:0; text-align:center;}
+    .nav {display:flex; justify-content:center; gap:30px;}
+    .nav a {color:#fff; text-decoration:none; font-weight:600; cursor:pointer;}
+    .nav a.active {color:#ff5722;}
+    .nav a:hover {color:#ff9800;}
+
+    section {display:none; padding:60px 20px; max-width:900px; margin:0 auto; text-align:center;}
+    section.active {display:block;}
+    h1 {color:#ff9800; margin-bottom:20px;}
+    p {font-size:1.1rem;}
+
+    .btn {display:inline-block; margin-top:15px; padding:12px 25px; background:#ff5722; color:#fff;
+          border-radius:30px; text-decoration:none; font-weight:600; transition:0.3s;}
+    .btn:hover {background:#e64a19; transform:scale(1.05);}
+
+    /* Profile Section with Diamond Style */
+    .profile {
+      display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:30px;
+      animation: fadeInUp 1s ease-out;
+    }
+    .profile img {
+      width:220px; height:220px; object-fit:cover;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      border:4px solid #ff9800;
+      box-shadow:0 0 15px rgba(255,152,0,0.5);
+      transition:transform 0.4s, box-shadow 0.4s;
+      animation: pulse 3s infinite;
+    }
+    .profile img:hover {
+      transform:scale(1.1) rotate(10deg);
+      box-shadow:0 0 25px rgba(255,152,0,0.8);
+    }
+    .profile-info {
+      max-width:400px; text-align:left;
+      animation: fadeIn 1.5s ease-out;
+    }
+    .profile-info h2 {color:#ff9800; margin-bottom:10px;}
+
+    /* Projects */
+    .projects {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
+    .project-card {background:#2e2e4f; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.5);}
+    .project-card h3 {color:#ff9800;}
+
+    /* Contact */
+    form {display:flex; flex-direction:column; gap:15px; max-width:400px; margin:0 auto;}
+    input, textarea {padding:12px; border:none; border-radius:8px; font-size:1rem;}
+    textarea {min-height:100px;}
+
+    @media(max-width:600px){
+      .profile {flex-direction:column;}
+      .profile img {width:160px; height:160px;}
+      .profile-info {text-align:center;}
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {opacity:0; transform:translateY(30px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+    @keyframes fadeIn {
+      from {opacity:0;}
+      to {opacity:1;}
+    }
+    @keyframes pulse {
+      0% {transform:scale(1);}
+      50% {transform:scale(1.05);}
+      100% {transform:scale(1);}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="nav-link active" data-page="home">Home</a>
+    <a class="nav-link" data-page="about">About</a>
+    <a class="nav-link" data-page="portfolio">Portfolio</a>
+    <a class="nav-link" data-page="contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Home -->
+<section id="home" class="active">
+  <h1>Welcome to My Portfolio</h1>
+  <p>Hi, I'm <b>K.Priyadharshini</b>, a web developer.</p>
+  <a class="btn" data-page="portfolio">View My Work</a>
+</section>
+
+<!-- About -->
+<section id="about">
+  <h1>About Me</h1>
+  <div class="profile">
+    <img src="https://i.ibb.co/93rxgKYH/IMG-20250819-WA0005.jpg" alt="Profile Picture">
+    <div class="profile-info">
+      <h2>MZCode01</h2>
+      <p>Passionate web developer creating dynamic and responsive websites.</p>
+      <p>Skills: HTML, CSS, JavaScript, Responsive Design</p>
+      <p>Email: priyadharshinisaratha2007@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section id="portfolio">
+  <h1>My Projects</h1>
+  <div class="projects">
+    <div class="project-card">
+      <h3>Project 1</h3>
+      <a href="https://example.com" target="_blank" class="btn">Open</a>
+    </div>
+    <div class="project-card">
+      <h3>Project 2</h3>
+      <a href="https://github.com" target="_blank" class="btn">View Code</a>
+    </div>
+    <div class="project-card">
+      <h3>Project 3</h3>
+      <a href="https://codepen.io" target="_blank" class="btn">Live Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h1>Contact Me</h1>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn">Send</button>
+  </form>
+</section>
+
+<script>
+  // Navigation switching
+  const navLinks = document.querySelectorAll(".nav-link, .btn[data-page]");
+  const sections = document.querySelectorAll("section");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const target = link.getAttribute("data-page");
+      if(target){
+        sections.forEach(sec => sec.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+        document.querySelectorAll(".nav a").forEach(nav => nav.classList.remove("active"));
+        const navTarget = document.querySelector(`.nav a[data-page='${target}']`);
+        if(navTarget) navTarget.classList.add("active");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
